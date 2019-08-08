@@ -1,0 +1,23 @@
+{
+  "name": "calculatorapi",
+  "version": "1.0.0",
+  "description": "calculator_api",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeedsSoySauce/CalculatorAPI.git"
+  },
+  "author": "Feras and Omkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NeedsSoySauce/CalculatorAPI/issues"
+  },
+  "homepage": "https://github.com/NeedsSoySauce/CalculatorAPI#readme"
+}
