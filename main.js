@@ -79,8 +79,56 @@ function isValidEquation(equation, base) {
     if (!isSymbolsValid) {
         return false;
     }
+    
+    let isOperand = false;
+    let expectingOperand = false;
+    // Check that operators and operands are correctly paired
+    for (let i = 0; i < equation.length; i++) {
+        switch (equation[i]) {
+            case "-":
+                // A sequence of minus signs if valid if there is an operand of some 
+                // kind at the end of it
+                expectingOperand = true;
+                break;
+            case "+":
+            case "*":
+            case "/":
+            case "^":
+                // Check that there's an operand on both sides of this operator
 
-    // TBD - Check that operators and operands are correctly paired
+                // These operators can't be the first item in an equation or the last
+                // and they also can't be the next item if we're expecting an operand
+                // and the last item must've been an operand
+
+                if (expectingOperand || 
+                    !isOperand ||
+                    i === 0 || 
+                    i === equation.length - 1) {
+                    return false;
+                }
+
+                expectingOperand = true;
+
+                break;
+            case "(":
+                // An open bracket can have anything before it, 
+                // and can be considered an operand
+                break;
+            case ")":
+                // An open bracket is not an operand
+                if (expectingOperand) return false;
+                break;
+            default:
+                isOperand = true;
+                expectingOperand = false;
+        }
+    }
+
+    // If we got to the end of the equation and are still expecting an operand
+    // then there was a sequence of '-' signs without an operand at the end.
+    if (expectingOperand) {
+        return false;
+    }
 
     return true;
 
